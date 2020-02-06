@@ -20,13 +20,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public  void onCreate(SQLiteDatabase db){
-
+        db.execSQL(CREATE_BOOK);  //执行建表语句
+        db.execSQL(CREATE_CATEGORY);
        Toast.makeText(mContext, "create succeeded", Toast.LENGTH_SHORT).show();
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(CREATE_BOOK);  //执行建表语句
-        db.execSQL(CREATE_CATEGORY);
+        db.execSQL("drop table if exists Book");
+        db.execSQL("drop table if exists Category");
         onCreate(db);
     }
 }
